@@ -1,13 +1,20 @@
-import { foo } from "./main.js";
 
-test("Returns sum", () => {
-    expect(foo(2,2)).toBe(4);
+import { shipFactory, shipStorage } from "./ship.js";
+
+
+
+
+
+
+test("Getting ship length", () => {
+    expect(shipStorage.getShips()[0].length).toBe(5);
 });
 
-test("Returns error", () => {
-    expect(foo(2,2)).toBe(0);
+test("Get ship isSunk", () => {
+    expect(shipStorage.getShips()[0].isSunk).toBe(false);
 });
 
-test("Returns correct value again", () => {
-    expect(foo(4,4)).toBe(8);
+test("Getting ship hits", () => {
+    expect(shipStorage.getShips()[0].timesHit).toBe(1);
 });
+
