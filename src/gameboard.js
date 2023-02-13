@@ -1,8 +1,54 @@
 
+import { shipStorage } from "./ship";
+
+
+
 const gameboardFactory = (array) => {
 
+    let state = {
+        shotsMissed: [],
+        shotsHit: [],
+        allSunk: false,
+    }
+
+    const placeShip = (y, x) => {
+
+        let ship = shipStorage.getShips()[0];
+        let board = gameboardStorage.getGameBoards()[0].array;
+
+        if (ship.isHorizontal === true) {
+            for (let i = 0; i < ship.length; i++) {
+                board[y][x + i] = "s";
+            }
+        } else {
+            for (let i = 0; i < ship.length; i++) {
+                board[y + i][x] = "s";
+            } 
+        }
+    };
+
+    const receiveAttack = (y,x) => {
+
+        let board = gameboardStorage.getGameBoards()[0].array;
+
+        if (board[y][x] === "m" || board[y][x] === "h") {
+            return "Already shot";
+        } else if (board[y][x] === "s") {
+            board[y][x] = "h";
+            return "Hit";
+        } else {
+            board[y][x] = "m";
+            return "Missed";
+        }
+    
+    };
+
+
+
     return { 
-        array
+        array,
+        placeShip,
+        receiveAttack
     }
 
 }
@@ -66,4 +112,4 @@ gameboardStorage.addBoard(playerBoard);
 // foo[0].hit();
 
 
-export { x, gameboardStorage };
+export { x, gameboardStorage, gameboardFactory };

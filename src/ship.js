@@ -3,7 +3,8 @@ const shipFactory = (length) => {
 
     let state = {
         timesHit: 0,
-        isSunk: false
+        isSunk: false,
+        isHorizontal: false,
     }
 
     const hit = () => {
@@ -24,6 +25,9 @@ const shipFactory = (length) => {
         },
         get isSunk() {
             return state.isSunk;
+        },
+        get isHorizontal() {
+            return state.isHorizontal;
         },
         hit,
         sink
