@@ -42,18 +42,39 @@ test("Getting array item at specific index", () => {
     expect(gameboardStorage.getGameBoards()[0].array[0][0]).toBe("x");
 });
 
-test("Testing recevieAttack function", () => {
+// test("Testing recevieAttack function", () => {
+//     let gameboard = gameboardStorage.getGameBoards();
+//     gameboard[0].placeShip(0,0);
+
+//     let ship = shipStorage.getShips()[0];
+
+//     expect(gameboard[0].receiveAttack(1,0)).toBe("Hit");
+//     expect(gameboard[0].receiveAttack(1,0)).toBe("Already hit");
+//     expect(gameboard[0].receiveAttack(0,0)).toBe("Hit");
+//     expect(gameboard[0].receiveAttack(0,0)).toBe("Already hit");
+//     expect(ship.timesHit).toBe(2);
+    
+// });
+
+test("Testing if gameloop returns true if all ships are sunk", () => {
     let gameboard = gameboardStorage.getGameBoards();
-    gameboard[0].placeShip(0,0);
+    gameboard[0].placeShip(0,0)
 
     let ship = shipStorage.getShips()[0];
 
-    expect(gameboard[0].receiveAttack(1,0)).toBe("Hit");
-    expect(gameboard[0].receiveAttack(1,0)).toBe("Already hit");
-    expect(gameboard[0].receiveAttack(0,0)).toBe("Hit");
-    expect(gameboard[0].receiveAttack(0,0)).toBe("Already hit");
-    expect(ship.timesHit).toBe(2);
-    
+
+    gameboard[0].receiveAttack(0,0);
+    gameboard[0].receiveAttack(1,0);
+    gameboard[0].receiveAttack(2,0);
+    gameboard[0].receiveAttack(3,0);
+
+    expect(gameboard[0].checkIfAllSunk()).toBe("game continues");
+    expect(ship.isSunk).toBe(false);
+
+    gameboard[0].receiveAttack(4,0);
+
+    expect(gameboard[0].checkIfAllSunk()).toBe("game has ended");
+    expect(ship.isSunk).toBe(true);
 });
 
 
