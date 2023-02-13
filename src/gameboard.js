@@ -6,13 +6,15 @@ import { shipStorage } from "./ship";
 const gameboardFactory = (array) => {
 
     let state = {
+        numberOfShips: [],
+        numberOfSinks: 0,
         shotsHit: [],
-        allSunk: false
     }
 
     const placeShip = (y, x) => {
 
         let ship = shipStorage.getShips()[0];
+        state.numberOfShips.push(ship);
         let board = gameboardStorage.getGameBoards()[0].array;
 
         if (ship.isHorizontal === true) {
@@ -43,6 +45,8 @@ const gameboardFactory = (array) => {
             }
             state.shotsHit.push(([y, x]));
             ship.hit();
+            checkIfSunk(ship)
+            checkIfAllSunk();
             return "Hit";
         } else {
             board[y][x] = "m";
@@ -51,12 +55,25 @@ const gameboardFactory = (array) => {
     
     };
 
-// ship {numberofHits, length, isSunk}
+    const checkIfSunk = (ship) => {
+        if (ship.isSunk === true) {
+            state.numberOfSinks += 1;
+        };
+    };
+
+    const checkIfAllSunk = () => {
+        if (state.numberOfSinks === state.numberOfShips.length) {
+            return "game has ended";
+        } else {
+            return "game continues"
+        }
+    };
 
     return { 
         array,
         placeShip,
         receiveAttack,
+        checkIfAllSunk,
         state
     }
 
