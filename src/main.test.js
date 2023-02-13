@@ -14,7 +14,7 @@ test("Get ship isSunk", () => {
 });
 
 test("Getting ship hits", () => {
-    expect(shipStorage.getShips()[0].timesHit).toBe(1);
+    expect(shipStorage.getShips()[0].timesHit).toBe(0);
 });
 
 test("Getting ship orientation", () => {
@@ -42,20 +42,22 @@ test("Getting array item at specific index", () => {
     expect(gameboardStorage.getGameBoards()[0].array[0][0]).toBe("x");
 });
 
-// test("Placing ship vertically", () => {
-//     let gameboard = gameboardStorage.getGameBoards();
-//     gameboard[0].placeShip(0,0);
-//     expect(gameboard).toBe("");
-// });
-
 test("Testing recevieAttack function", () => {
     let gameboard = gameboardStorage.getGameBoards();
     gameboard[0].placeShip(0,0);
-    expect(gameboard[0].receiveAttack(0,0)).toBe("Hit");
+
+    let ship = shipStorage.getShips()[0];
+
     expect(gameboard[0].receiveAttack(1,0)).toBe("Hit");
-    expect(gameboard[0].receiveAttack(0,1)).toBe("Missed");
-    expect(gameboard[0].receiveAttack(0,1)).toBe("Already shot");
+    expect(gameboard[0].receiveAttack(1,0)).toBe("Already hit");
+    expect(gameboard[0].receiveAttack(0,0)).toBe("Hit");
+    expect(gameboard[0].receiveAttack(0,0)).toBe("Already hit");
+    expect(ship.timesHit).toBe(2);
+    
 });
+
+
+
 
 
 

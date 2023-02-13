@@ -6,9 +6,8 @@ import { shipStorage } from "./ship";
 const gameboardFactory = (array) => {
 
     let state = {
-        shotsMissed: [],
         shotsHit: [],
-        allSunk: false,
+        allSunk: false
     }
 
     const placeShip = (y, x) => {
@@ -18,11 +17,11 @@ const gameboardFactory = (array) => {
 
         if (ship.isHorizontal === true) {
             for (let i = 0; i < ship.length; i++) {
-                board[y][x + i] = "s";
+                board[y][x + i] = ship
             }
         } else {
             for (let i = 0; i < ship.length; i++) {
-                board[y + i][x] = "s";
+                board[y + i][x] = ship
             } 
         }
     };
@@ -30,11 +29,20 @@ const gameboardFactory = (array) => {
     const receiveAttack = (y,x) => {
 
         let board = gameboardStorage.getGameBoards()[0].array;
+        let ship = shipStorage.getShips()[0];
 
-        if (board[y][x] === "m" || board[y][x] === "h") {
+        if (board[y][x] === "m") {
             return "Already shot";
-        } else if (board[y][x] === "s") {
-            board[y][x] = "h";
+        } else if (board[y][x] === ship) {
+            for (const z in state.shotsHit){
+                if(`${state.shotsHit[z]}` === `${[y,x]}`){
+                    console.log(`${state.shotsHit[z]}`);
+                    console.log(`${[y,x]}`);
+                    return "Already hit"
+                }
+            }
+            state.shotsHit.push(([y, x]));
+            ship.hit();
             return "Hit";
         } else {
             board[y][x] = "m";
@@ -43,12 +51,13 @@ const gameboardFactory = (array) => {
     
     };
 
-
+// ship {numberofHits, length, isSunk}
 
     return { 
         array,
         placeShip,
-        receiveAttack
+        receiveAttack,
+        state
     }
 
 }
@@ -77,7 +86,6 @@ for (let i = 0; i < x.length; i++) {
 let playerBoard = gameboardFactory(x);
 const gameboardStorage = new GameboardStorage();
 gameboardStorage.addBoard(playerBoard);
-
 
 
 

@@ -56,7 +56,7 @@ let ship5 = shipFactory(5);
 
 shipStorage.addShip(ship5);
 
-let foo = shipStorage.getShips();
-foo[0].hit();
+// let foo = shipStorage.getShips();
+// foo[0].hit();
 
 export { shipFactory, shipStorage };
