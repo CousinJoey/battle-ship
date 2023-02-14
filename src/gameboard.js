@@ -38,8 +38,6 @@ const gameboardFactory = (array) => {
         } else if (board[y][x] === ship) {
             for (const z in state.shotsHit){
                 if(`${state.shotsHit[z]}` === `${[y,x]}`){
-                    console.log(`${state.shotsHit[z]}`);
-                    console.log(`${[y,x]}`);
                     return "Already hit"
                 }
             }
@@ -103,6 +101,12 @@ for (let i = 0; i < x.length; i++) {
 let playerBoard = gameboardFactory(x);
 const gameboardStorage = new GameboardStorage();
 gameboardStorage.addBoard(playerBoard);
+
+let testBoard = gameboardFactory(x);
+gameboardStorage.addBoard(testBoard);
+
+let testBoardTwo = gameboardFactory(x);
+gameboardStorage.addBoard(testBoardTwo);
 
 
 

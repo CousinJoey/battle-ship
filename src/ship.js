@@ -56,6 +56,9 @@ let ship5 = shipFactory(5);
 
 shipStorage.addShip(ship5);
 
+let ship1 = shipFactory(2);
+shipStorage.addShip(ship1);
+
 // let foo = shipStorage.getShips();
 // foo[0].hit();
 
