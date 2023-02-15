@@ -1,5 +1,5 @@
 
-const shipFactory = (length) => {
+const shipFactory = (name, length) => {
 
     let state = {
         timesHit: 0,
@@ -20,6 +20,7 @@ const shipFactory = (length) => {
 
     return {
         length,
+        name,
         get timesHit() {
             return state.timesHit;
         },
@@ -50,16 +51,5 @@ class ShipStorage {
 
 };
 
-const shipStorage = new ShipStorage();
 
-let ship5 = shipFactory(5);
-
-shipStorage.addShip(ship5);
-
-let ship1 = shipFactory(2);
-shipStorage.addShip(ship1);
-
-// let foo = shipStorage.getShips();
-// foo[0].hit();
-
-export { shipFactory, shipStorage };
+export { shipFactory, ShipStorage };
