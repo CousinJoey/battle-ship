@@ -18,6 +18,10 @@ const shipFactory = (name, length) => {
         state.isSunk = true;
     };
 
+    const rotate = () => {
+        state.isHorizontal = !state.isHorizontal;
+    }
+
     return {
         length,
         name,
@@ -31,7 +35,8 @@ const shipFactory = (name, length) => {
             return state.isHorizontal;
         },
         hit,
-        sink
+        sink,
+        rotate
     }
 };
 

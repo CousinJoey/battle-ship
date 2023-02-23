@@ -32,8 +32,8 @@ class Player {
 
     sendAttack(y, x, player, boardRecipient) {
         if (this.whoseTurn()) {
-            boardRecipient.receiveAttack(y,x);
             this.endTurn(player);
+            return boardRecipient.receiveAttack(y, x);
         }
     }
 

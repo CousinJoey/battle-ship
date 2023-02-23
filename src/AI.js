@@ -15,12 +15,15 @@ export class AI extends Player{
         if (this.whoseTurn() === true) {
             let coords = {y:undefined, x:undefined};
                 while (this.whoseTurn() === true) {
-                coords.y = Math.floor(Math.random() * 7);
-                coords.x = Math.floor(Math.random() * 7);
+                coords.y = Math.floor(Math.random() * 10);
+                coords.x = Math.floor(Math.random() * 10);
                 if (!(this.shotsArray.some(number => number.y == coords.y && number.x == coords.x))) {
                     this.shotsArray.push(coords);
-                    this.sendAttack(coords.y, coords.x, this.opponent, this.opponentBoard);
-                    break;
+                    return {
+                        result: this.sendAttack(coords.y, coords.x, this.opponent, this.opponentBoard),
+                        y: coords.y,
+                        x: coords.x
+                    };
                 }
             }
         }

@@ -29,16 +29,26 @@ header {
 }
 
 .player-board-container {
-    width: 100%;
+    width: 90%;
     height: 80%;
     display: grid;
     grid-template-columns: repeat(10, 1fr);
     grid-template-rows: repeat(10, 1fr);
+    padding: 1em;
 }
 
 .computer-container {
     background-color: blueviolet;
     width: 50%;
+}
+
+.computer-board-container {
+    width: 90%;
+    height: 80%;
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(10, 1fr);
+    padding: 1em;
 }
 
 .cell {
@@ -47,3 +57,33 @@ header {
     justify-content: center;
     align-items: center;
 }
+
+.bot-cell {
+    border: black solid 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.addShips{
+    background-color: rgb(233, 240, 247);
+    display: flex;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: space-around;
+  }
+  
+  .block{
+    background-color: rgb(89, 179, 71);
+    width: 50px;
+    height: 50px;
+    border: #5A5A5A solid 1px;
+  }
+
+  .color {
+    background-color: blue;
+  }
+
+  .ship-color {
+    background-color: yellowgreen;
+  }
