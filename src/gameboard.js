@@ -1,7 +1,4 @@
 
-import { shipStorage } from "./ship";
-import { createBoard } from "./DOM";
-
 const gameboardFactory = () => {
 
     const createGameBoard = () => {

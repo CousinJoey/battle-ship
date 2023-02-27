@@ -3,10 +3,13 @@ import { createBoard } from "./DOM";
 import { shipFactory, ShipStorage } from "./ship";
 import { Player } from "./player";
 import { AI } from "./AI";
+import { listeners } from "./DOM";
 
 
 export let playerGameboard = gameboardFactory();
 export let computerGameboard = gameboardFactory();
+
+listeners();
 
 let gameboardClass = new GameboardStorage();
 

@@ -1,8 +1,18 @@
 
-import { playerGameboard, array, loggingGameboard, player, computer, computerGameboard } from ".";
-import { gameboardFactory, GameboardStorage } from "./gameboard";
-import { shipFactory, ShipStorage } from "./ship";
+import { playerGameboard, array, player, computer, computerGameboard } from ".";
 
+
+export function listeners() {
+    
+    document.addEventListener("click", (e) => {
+
+        if (e.target.matches("#play-again")) {
+            location.reload();
+        }
+
+    });
+
+}
 
 
 export function createBoard(name) {
@@ -36,7 +46,7 @@ export function createBoard(name) {
             cell.setAttribute("x", y);
             if (name === "computer") {
                 cell.addEventListener("click", (e) => {
-                    if (arrayOfShips.length || computerGameboard.checkIfAllSunk() || playerGameboard.checkIfAllSunk() || ["red", "white"].includes(cell.style.background)) {
+                    if (arrayOfShips.length || computerGameboard.checkIfAllSunk() || playerGameboard.checkIfAllSunk() || cell.style.background === "red" || cell.textContent === "○") {
                             return;
                         }
                     processAttack(e.target);
@@ -183,7 +193,10 @@ function processAttack(e) {
 };
 
 function endGame(name) {
-    console.log(name + " " + "Is the winner!");
+    let win = document.querySelector(".win-toggle")
+    win.style.display = "block";
+    let msg = document.querySelector(".winning-ann")
+    msg.textContent = `${name} is the winner!`
 };
 
 function updatePlayerBoard(attackOutcome, y, x) {
@@ -192,7 +205,7 @@ function updatePlayerBoard(attackOutcome, y, x) {
     if (attackOutcome === "hit") {
         target.style.background = "red";
     } else if (attackOutcome === "miss") {
-        target.style.background = "white";
+        target.innerHTML = "○"
     }
 };
 
@@ -202,9 +215,6 @@ function updateComputerBoard(attackOutcome, y, x) {
     if (attackOutcome === "hit") {
         target.style.background = "red";
     } else if (attackOutcome === "miss") {
-        target.style.background = "white";
+        target.innerHTML = "○"
     }
 }
-
-
-// testPlayerGameBoard.placeShip(testItem, y, x)
